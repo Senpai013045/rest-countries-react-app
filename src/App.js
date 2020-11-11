@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import {
+  switchTheme,
+  syncLocalStorageThemeToState,
+} from "./store/actioncreators";
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    props.syncTheme();
+    // eslint-disable-next-line
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <button onClick={props.switchTheme}>{props.theme} mode selected</button>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    theme: state.theme,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    switchTheme: () => dispatch(switchTheme()),
+    syncTheme: () => dispatch(syncLocalStorageThemeToState()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
