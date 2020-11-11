@@ -1,4 +1,3 @@
-import "./actionTypes";
 import * as actionTypes from "./actionTypes";
 
 function actualThemeSwitcherFunction() {
