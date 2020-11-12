@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 
-function actualThemeSwitcherFunction() {
+/*function actualThemeSwitcherFunction() {
   return {
     type: actionTypes.SWITCH_THEME,
   };
@@ -11,6 +11,13 @@ export const switchTheme = () => {
     setTimeout(() => {
       dispatch(actualThemeSwitcherFunction());
     }, 1000);
+  };
+};
+*/
+
+export const switchTheme = () => {
+  return {
+    type: actionTypes.SWITCH_THEME,
   };
 };
 

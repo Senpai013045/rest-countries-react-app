@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  switchTheme,
-  syncLocalStorageThemeToState,
-} from "./store/actioncreators";
+import Header from "./components/header";
+import { syncLocalStorageThemeToState } from "./store/actioncreators";
 
 function App(props) {
   useEffect(() => {
@@ -11,21 +9,16 @@ function App(props) {
     // eslint-disable-next-line
   }, []);
   return (
-    <button onClick={props.switchTheme}>{props.theme} mode selected</button>
+    <div className="App">
+      <Header />
+    </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    theme: state.theme,
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    switchTheme: () => dispatch(switchTheme()),
     syncTheme: () => dispatch(syncLocalStorageThemeToState()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
