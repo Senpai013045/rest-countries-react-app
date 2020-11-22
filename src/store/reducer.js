@@ -1,6 +1,7 @@
 import * as actionTypes from "./actionTypes";
 const initialState = {
   theme: "dark",
+  selected: null,
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,6 +16,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         theme: action.payload.theme,
+      };
+    case actionTypes.SET_SELECTED:
+      return {
+        ...state,
+        selected: action.payload.value,
       };
     default:
       return state;

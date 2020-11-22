@@ -30,3 +30,12 @@ export const syncLocalStorageThemeToState = () => {
     },
   };
 };
+
+export const setSelected = (value) => {
+  return {
+    type: actionTypes.SET_SELECTED,
+    payload: {
+      value: value,
+    },
+  };
+};

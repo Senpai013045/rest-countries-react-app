@@ -10,21 +10,25 @@ const Header = (props) => {
   if (props.theme === "dark") {
     whatWeRender = (
       <>
-        <img src={sun} alt="sun" /> <span>Light mode</span>
+        <img className={styles.img} src={sun} alt="sun" />{" "}
+        <span>Light mode</span>
       </>
     );
   } else {
     whatWeRender = (
       <>
-        <img src={moon} alt="moon" /> <span>Dark mode</span>
+        <img className={styles.img} src={moon} alt="moon" />{" "}
+        <span>Dark mode</span>
       </>
     );
   }
 
   return (
-    <header>
-      <h1>Where in the world?</h1>
-      <button onClick={props.switchTheme}>{whatWeRender}</button>
+    <header className={styles.header}>
+      <h1 className={styles.h1}>Where in the world?</h1>
+      <button className={styles.button} onClick={props.switchTheme}>
+        {whatWeRender}
+      </button>
     </header>
   );
 };

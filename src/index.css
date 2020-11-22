@@ -8,6 +8,21 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+  transition: background-color 0.3s ease-in-out;
+}
+.light-mode {
+  --color-text: hsl(200, 15%, 8%);
+  --color-background: hsl(0, 0%, 98%);
+  --color-elements: hsl(0, 0%, 100%);
+  --color-input: hsl(0, 0%, 90%);
+  --color-svg: 0;
+}
+.dark-mode {
+  --color-text: hsl(0, 0%, 100%);
+  --color-background: hsl(207, 26%, 17%);
+  --color-elements: hsl(209, 23%, 22%);
+  --color-input: hsl(209, 23%, 22%);
+  --color-svg: 1;
 }
 
 html {
@@ -17,16 +32,10 @@ html {
 
 body {
   box-sizing: border-box;
+  color: var(--color-text);
 }
-.light-mode {
-  --color-text: hsl(200, 15%, 8%);
-  --color-background: hsl(0, 0%, 98%);
-  --color-elements: hsl(0, 0%, 100%);
-  --color-input: hsl(0, 0%, 52%);
-}
-.dark-mode {
-  --color-text: hsl(0, 0%, 100%);
-  --color-background: hsl(207, 26%, 17%);
-  --color-elements: hsl(209, 23%, 22%);
-  --color-input: hsl(0, 0%, 100%);
+
+.App {
+  background-color: var(--color-background);
+  min-height: 100vh;
 }
