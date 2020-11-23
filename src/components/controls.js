@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./controls.module.css";
 import magnifyingGlass from "../assets/icons/basic_magnifier.svg";
 import { setSelected } from "../store/actioncreators";
 import { connect } from "react-redux";
 
 const Controls = (props) => {
+  const [toggled, setToggled] = useState(false);
   return (
     <form className={styles.controls}>
       <div className="searchArea">
@@ -23,15 +24,21 @@ const Controls = (props) => {
         />
       </div>
       <div className={styles.dropdownWrapper}>
+        <label htmlFor="pick" onClick={() => setToggled(!toggled)}>
+          {props.selected || "Filter by region"}
+          <i className={toggled ? styles.on : null}>&#9660;</i>
+        </label>
         <select
+          id="pick"
           onChange={(e) => {
             props.setSelected(e.target.value);
           }}
           className={styles.dropdown}
+          value={props.selected || " "}
         >
-          <option value="" defaultValue className={styles.hidden}>
+          {/* <option value="" defaultValue className={styles.hidden}>
             Filter by Region
-          </option>
+          </option> */}
           <option className={styles.option} value="Africa">
             Africa
           </option>
@@ -48,6 +55,26 @@ const Controls = (props) => {
             Oceania
           </option>
         </select>
+        <ul
+          className={[
+            styles.customDropdown,
+            toggled ? null : styles.dropdownOff,
+          ].join(" ")}
+          onClick={() => {
+            setToggled(false);
+          }}
+        >
+          {["Africa", "America", "Asia", "Europe", "Oceania"].map((r) => (
+            <li
+              key={r}
+              onClick={() => {
+                props.setSelected(r);
+              }}
+            >
+              {r}
+            </li>
+          ))}
+        </ul>
       </div>
     </form>
   );
