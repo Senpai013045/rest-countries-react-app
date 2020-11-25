@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import Card from "./card";
 import Controls from "./controls";
 import Grid from "./grid";
 import styles from "./main.module.css";
+import { getAllCountries } from "../store/actioncreators";
 
 const Main = (props) => {
-  const [countries, setCountries] = useState([]);
   useEffect(() => {
-    fetch(
-      "https://restcountries.eu/rest/v2/all?fields=name;population;region;capital;flag"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setCountries(data);
-      });
+    props.fetchAllCountries();
+    // eslint-disable-next-line
   }, []);
   return (
     <main className={styles.main}>
       <Controls />
       <Grid>
-        {countries.map((item) => (
+        {props.countries.map((item) => (
           <Card
+            hidden={!props.filteredCountries.includes(item)}
             key={item.name}
             imageUrl={item.flag}
             name={item.name}
@@ -34,4 +31,17 @@ const Main = (props) => {
   );
 };
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    filteredCountries: state.filteredCountries,
+    countries: state.countries,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllCountries: () => dispatch(getAllCountries()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

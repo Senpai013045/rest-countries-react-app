@@ -3,6 +3,7 @@ import styles from "./controls.module.css";
 import magnifyingGlass from "../assets/icons/basic_magnifier.svg";
 import { setSelected } from "../store/actioncreators";
 import { connect } from "react-redux";
+import { filterCountries } from "../store/actioncreators";
 
 const Controls = (props) => {
   const [toggled, setToggled] = useState(false);
@@ -39,11 +40,14 @@ const Controls = (props) => {
           {/* <option value="" defaultValue className={styles.hidden}>
             Filter by Region
           </option> */}
+          <option className={styles.option} value="All">
+            All
+          </option>
           <option className={styles.option} value="Africa">
             Africa
           </option>
-          <option className={styles.option} value="America">
-            America
+          <option className={styles.option} value="Americas">
+            Americas
           </option>
           <option className={styles.option} value="Asia">
             Asia
@@ -64,16 +68,19 @@ const Controls = (props) => {
             setToggled(false);
           }}
         >
-          {["Africa", "America", "Asia", "Europe", "Oceania"].map((r) => (
-            <li
-              key={r}
-              onClick={() => {
-                props.setSelected(r);
-              }}
-            >
-              {r}
-            </li>
-          ))}
+          {["All", "Africa", "Americas", "Asia", "Europe", "Oceania"].map(
+            (r) => (
+              <li
+                key={r}
+                onClick={() => {
+                  props.setSelected(r);
+                  props.filterCountries(r);
+                }}
+              >
+                {r}
+              </li>
+            )
+          )}
         </ul>
       </div>
     </form>
@@ -89,6 +96,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setSelected: (v) => dispatch(setSelected(v)),
+    filterCountries: (r) => dispatch(filterCountries(r)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Controls);

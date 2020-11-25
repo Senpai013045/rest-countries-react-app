@@ -3,7 +3,9 @@ import styles from "./card.module.css";
 
 const Card = (props) => {
   return (
-    <div className={styles.card}>
+    <div
+      className={[styles.card, props.hidden ? styles.hidden : null].join(" ")}
+    >
       <div
         className={styles.imageHolder}
         style={{ backgroundImage: `url(${props.imageUrl})` }}

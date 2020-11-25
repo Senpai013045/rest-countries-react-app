@@ -1,7 +1,10 @@
 import * as actionTypes from "./actionTypes";
 const initialState = {
   theme: "dark",
-  selected: null,
+  selected: "",
+  countries: [],
+  filterText: "",
+  filteredCountries: [],
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -21,6 +24,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         selected: action.payload.value,
+      };
+    case actionTypes.GET_ALL_COUNTRIES:
+      return {
+        ...state,
+        countries: action.payload.countries,
+        filteredCountries: action.payload.countries,
+      };
+    case actionTypes.FILTER_COUNTRIES:
+      return {
+        ...state,
+        filteredCountries: state.countries.filter((item) => {
+          if (action.payload.region === "All") {
+            return true;
+          }
+          return item.region.indexOf(action.payload.region) !== -1;
+        }),
       };
     default:
       return state;
