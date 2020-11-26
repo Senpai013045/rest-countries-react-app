@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import styles from "./controls.module.css";
 import magnifyingGlass from "../assets/icons/basic_magnifier.svg";
-import { setSelected } from "../store/actioncreators";
+import {
+  searchCountries,
+  setFilterText,
+  setSelected,
+} from "../store/actioncreators";
 import { connect } from "react-redux";
 import { filterCountries } from "../store/actioncreators";
 
@@ -18,6 +22,11 @@ const Controls = (props) => {
           />
         </label>
         <input
+          onChange={(e) => {
+            props.setFilterText(e.target.value);
+            props.filterCountries();
+          }}
+          value={props.filterText}
           className={styles.input}
           id="search"
           placeholder="Search for a country..."
@@ -74,7 +83,8 @@ const Controls = (props) => {
                 key={r}
                 onClick={() => {
                   props.setSelected(r);
-                  props.filterCountries(r);
+                  // props.filterCountries(r);
+                  props.filterCountries();
                 }}
               >
                 {r}
@@ -90,13 +100,19 @@ const Controls = (props) => {
 const mapStateToProps = (state) => {
   return {
     selected: state.selected,
+    filterText: state.filterText,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setSelected: (v) => dispatch(setSelected(v)),
-    filterCountries: (r) => dispatch(filterCountries(r)),
+    filterCountries: () => dispatch(filterCountries()),
+    // filterCountries: (r) => dispatch(filterCountries(r)),
+    searchCountries: (t) => {
+      dispatch(searchCountries(t));
+    },
+    setFilterText: (t) => dispatch(setFilterText(t)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Controls);

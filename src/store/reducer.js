@@ -35,10 +35,47 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filteredCountries: state.countries.filter((item) => {
-          if (action.payload.region === "All") {
-            return true;
+          if (state.selected === "All" || "") {
+            // return true;
+            return (
+              item.name
+                .toLowerCase()
+                .indexOf(state.filterText.toLowerCase()) !== -1
+            );
+          } else {
+            return (
+              item.region.indexOf(state.selected) !== -1 &&
+              item.name
+                .toLowerCase()
+                .indexOf(state.filterText.toLowerCase()) !== -1
+            );
           }
-          return item.region.indexOf(action.payload.region) !== -1;
+        }),
+      };
+    // case actionTypes.FILTER_COUNTRIES:
+    //   return {
+    //     ...state,
+    //     filteredCountries: state.countries.filter((item) => {
+    //       if (action.payload.region === "All") {
+    //         return true;
+    //       }
+    //       return item.region.indexOf(action.payload.region) !== -1;
+    //     }),
+    //   };
+    case actionTypes.SET_FILTER_TEXT:
+      return {
+        ...state,
+        filterText: action.payload.text,
+      };
+    case actionTypes.SEARCH_COUNTRIES:
+      return {
+        ...state,
+        filteredCountries: state.countries.filter((item) => {
+          return (
+            item.name
+              .toLowerCase()
+              .indexOf(action.payload.text.toLowerCase()) !== -1
+          );
         }),
       };
     default:

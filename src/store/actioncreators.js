@@ -61,11 +61,34 @@ export const setSelected = (value) => {
   };
 };
 
-export const filterCountries = (r) => {
+export const filterCountries = () => {
   return {
     type: actionTypes.FILTER_COUNTRIES,
+  };
+};
+// export const filterCountries = (r) => {
+//   return {
+//     type: actionTypes.FILTER_COUNTRIES,
+//     payload: {
+//       region: r,
+//     },
+//   };
+// };
+
+export const searchCountries = (t) => {
+  return {
+    type: actionTypes.SEARCH_COUNTRIES,
     payload: {
-      region: r,
+      text: t,
+    },
+  };
+};
+
+export const setFilterText = (t) => {
+  return {
+    type: actionTypes.SET_FILTER_TEXT,
+    payload: {
+      text: t,
     },
   };
 };
