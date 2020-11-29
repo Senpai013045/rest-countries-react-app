@@ -1,9 +1,12 @@
 import React from "react";
 import styles from "./card.module.css";
+import { useHistory } from "react-router-dom";
 
 const Card = (props) => {
+  const history = useHistory();
   return (
     <div
+      onClick={() => history.push(`/detail/${props.name}`)}
       className={[styles.card, props.hidden ? styles.hidden : null].join(" ")}
     >
       <div

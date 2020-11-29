@@ -27,11 +27,12 @@ export const requestToApi = (d) => {
 export const getAllCountries = () => {
   return function (dispatch) {
     fetch(
-      "https://restcountries.eu/rest/v2/all?fields=name;population;region;capital;flag"
+      "https://restcountries.eu/rest/v2/all?fields=name;population;region;capital;flag;alpha3Code"
     )
       .then((res) => res.json())
       .then((data) => {
         dispatch(requestToApi(data));
+        dispatch(filterCountries());
       });
   };
 };

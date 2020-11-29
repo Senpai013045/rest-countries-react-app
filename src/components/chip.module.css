@@ -1,0 +1,18 @@
+.chip {
+  border: none;
+  background-color: var(--color-elements);
+  color: var(--color-text);
+  padding: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+.chip:hover {
+  box-shadow: none;
+  transform: translateY(-5px);
+}

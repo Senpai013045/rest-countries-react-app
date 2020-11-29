@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import Header from "./components/header";
 import Main from "./components/main";
 import { syncLocalStorageThemeToState } from "./store/actioncreators";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import Detail from "./components/detail";
 
 function App(props) {
   //theme switching
@@ -24,10 +26,19 @@ function App(props) {
   //conditionally select the root variables
 
   return (
-    <div className="App">
-      <Header />
-      <Main />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Header />
+        <Switch>
+          <Route path="/detail/:country">
+            <Detail />
+          </Route>
+          <Route path="*">
+            <Main />
+          </Route>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 const mapStateToProps = (state) => {

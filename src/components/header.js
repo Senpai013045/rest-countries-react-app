@@ -4,8 +4,10 @@ import sun from "../assets/icons/weather_sun.svg";
 import { connect } from "react-redux";
 import { switchTheme } from "../store/actioncreators";
 import styles from "./header.module.css";
+import { useHistory } from "react-router-dom";
 
 const Header = (props) => {
+  const history = useHistory();
   let whatWeRender;
   if (props.theme === "dark") {
     whatWeRender = (
@@ -24,8 +26,10 @@ const Header = (props) => {
   }
 
   return (
-    <header className={styles.header}>
-      <h1 className={styles.h1}>Where in the world?</h1>
+    <header className={styles.header} title="Home?">
+      <h1 onClick={() => history.push("/")} className={styles.h1}>
+        Where in the world?
+      </h1>
       <button className={styles.button} onClick={props.switchTheme}>
         {whatWeRender}
       </button>
