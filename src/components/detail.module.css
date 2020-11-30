@@ -69,12 +69,14 @@
   justify-content: space-between;
 }
 .listItem {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
 }
 .listItem h5,
 .border h5,
 p {
   font-size: 1.4rem;
+  margin-right: 3rem;
 }
 .listItem h5 {
   margin-right: 1rem;
@@ -84,4 +86,42 @@ p {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
+}
+@media only screen and (max-width: 1150px) {
+  .textHolder {
+    padding: 2rem 7rem;
+  }
+  .list {
+    grid-row-gap: 1rem;
+  }
+}
+@media only screen and (max-width: 1086px) {
+  .details {
+    flex-direction: column;
+  }
+  .flagHolder {
+    width: 50%;
+    margin-left: 5rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main {
+    padding: 0 3rem;
+  }
+  .list {
+    grid-template-columns: max-content;
+  }
+  .border h5 {
+    margin-bottom: 1.5rem;
+  }
+  .flagHolder {
+    width: 75%;
+    margin-top: 3.5rem;
+    padding: 0rem;
+  }
+  .textHolder {
+    margin-top: 3.5rem;
+    padding: 1rem 5rem;
+  }
 }

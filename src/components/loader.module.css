@@ -1,0 +1,27 @@
+.loaderWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  width: 10rem;
+  height: 10rem;
+  padding: 5rem;
+  border-radius: 50%;
+  border: 1rem solid var(--color-elements);
+  border-bottom: 1rem solid var(--color-text);
+  border-top: 1rem solid var(--color-text);
+  animation-name: spin;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -2,9 +2,11 @@
   font-size: 1.4rem;
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
   position: relative;
   margin-bottom: 5rem;
 }
+
 .input {
   background-color: var(--color-elements);
   border: none;
@@ -72,6 +74,17 @@
 .dropdownWrapper {
   position: absolute;
   right: 0;
+}
+
+@media only screen and (max-width: 500px) {
+  .controls {
+    flex-direction: column;
+    padding-bottom: 5rem;
+  }
+  .dropdownWrapper {
+    right: initial;
+    top: 6rem;
+  }
 }
 
 .customDropdown {

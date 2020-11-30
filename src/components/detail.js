@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./detail.module.css";
 import { useHistory, useParams } from "react-router-dom";
 import Chip from "./chip";
+import Loader from "../components/loader";
 
 const Detail = (props) => {
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ const Detail = (props) => {
       });
   }, [country]);
   if (loading) {
-    return <p>loading</p>;
+    return <Loader />;
   } else {
     return (
       <main className={styles.main}>
