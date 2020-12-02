@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Header from "./components/header";
 import Main from "./components/main";
 import { syncLocalStorageThemeToState } from "./store/actioncreators";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Detail from "./components/detail";
 
 function App(props) {
@@ -21,6 +21,7 @@ function App(props) {
       }
       document.body.classList.add("dark-mode");
     }
+    // eslint-disable-next-line
   });
   //conditionally select the root variables
 

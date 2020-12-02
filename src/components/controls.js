@@ -18,12 +18,7 @@ const Controls = (props) => {
   };
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-      }}
-      className={styles.controls}
-    >
+    <form className={styles.controls}>
       <div className="searchArea">
         <label className={styles.label} htmlFor="search">
           <img

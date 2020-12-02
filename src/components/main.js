@@ -5,10 +5,14 @@ import Controls from "./controls";
 import Grid from "./grid";
 import styles from "./main.module.css";
 import { getAllCountries } from "../store/actioncreators";
+import { useHistory } from "react-router-dom";
 
 const Main = (props) => {
+  const history = useHistory();
+
   useEffect(() => {
     props.fetchAllCountries();
+    console.log(history);
 
     // eslint-disable-next-line
   }, []);

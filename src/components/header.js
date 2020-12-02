@@ -12,14 +12,14 @@ const Header = (props) => {
   if (props.theme === "dark") {
     whatWeRender = (
       <>
-        <img className={styles.img} src={sun} alt="sun" />
+        <img className={styles.img} src={sun} alt="sun" />{" "}
         <span>Light mode</span>
       </>
     );
   } else {
     whatWeRender = (
       <>
-        <img className={styles.img} src={moon} alt="moon" />
+        <img className={styles.img} src={moon} alt="moon" />{" "}
         <span>Dark mode</span>
       </>
     );
