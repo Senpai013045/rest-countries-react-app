@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./controls.module.css";
 import magnifyingGlass from "../assets/icons/basic_magnifier.svg";
 import {
@@ -11,6 +11,12 @@ import { filterCountries } from "../store/actioncreators";
 
 const Controls = (props) => {
   const [toggled, setToggled] = useState(false);
+  const selectElement = useRef(null);
+
+  const clickHandler = () => {
+    setToggled((prev) => !prev);
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -39,11 +45,18 @@ const Controls = (props) => {
         />
       </div>
       <div className={styles.dropdownWrapper}>
-        <label htmlFor="pick" onClick={() => setToggled(!toggled)}>
+        <label htmlFor="pick">
           {props.selected || "Filter by region"}
           <i className={toggled ? styles.on : null}>&#9660;</i>
         </label>
         <select
+          ref={selectElement}
+          onFocus={() => {
+            setToggled(true);
+          }}
+          onBlur={() => {
+            setToggled(false);
+          }}
           id="pick"
           onChange={(e) => {
             props.setSelected(e.target.value);
@@ -78,9 +91,10 @@ const Controls = (props) => {
             styles.customDropdown,
             toggled ? null : styles.dropdownOff,
           ].join(" ")}
-          onClick={() => {
-            setToggled(false);
-          }}
+          // onClick={() => {
+          //  setToggled(false);
+          // }}
+          onClick={clickHandler}
         >
           {["All", "Africa", "Americas", "Asia", "Europe", "Oceania"].map(
             (r) => (
@@ -90,6 +104,7 @@ const Controls = (props) => {
                   props.setSelected(r);
                   // props.filterCountries(r);
                   props.filterCountries();
+                  setToggled(false);
                 }}
               >
                 {r}
