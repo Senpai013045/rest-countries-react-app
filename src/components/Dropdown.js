@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import Backdrop from "./Backdrop";
 import styles from "./Dropdown.module.css";
-
 const regions = ["All", "Africa", "America", "Asia", "Europe", "Ocenia"];
 
 const Dropdown = () => {
   const [showDropdown, setShowDropDown] = useState(false);
+  const [selected, setSelected] = useState("All");
 
   const toggleDropdownHandler = () => setShowDropDown((prev) => !prev);
-
   const hideDropdown = () => setShowDropDown(false);
   return (
     <>
       <div className={styles.wrapper} onClick={toggleDropdownHandler}>
         <h4 className={styles.label}>
-          <span>Filter by region</span>
+          <span style={{ pointerEvents: "none" }}>
+            {selected === "All" ? "Filter by region" : selected}
+          </span>
           <figure
             className={[
               styles.figure,
@@ -38,7 +39,11 @@ const Dropdown = () => {
         >
           <ul className={styles.ul}>
             {regions.map((item) => (
-              <li className={styles.li} key={item}>
+              <li
+                className={styles.li}
+                onClick={() => setSelected(item)}
+                key={item}
+              >
                 {item}
               </li>
             ))}

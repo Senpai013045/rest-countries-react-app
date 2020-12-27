@@ -1,0 +1,47 @@
+.card {
+  transition: opacity 300ms;
+  background-color: var(--color-elements);
+  min-height: 30rem;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.imageHolder {
+  height: 20rem;
+  width: 100%;
+  background-color: rgba(32, 178, 171, 0.521);
+  background-size: cover;
+  background-origin: 50% 50%;
+}
+img {
+  width: 100%;
+}
+
+.enter {
+  opacity: 0;
+}
+.entering {
+  opacity: 1;
+}
+
+.details {
+  padding-left: 2rem;
+  padding-bottom: 2rem;
+}
+
+.card__header {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+.card__detail {
+  font-size: 1.6rem;
+  margin-bottom: 0.7rem;
+}
+.card__detail__header {
+  font-weight: 600;
+}
+.card__detail__data {
+  opacity: 0.8;
+  margin-left: 0.1rem;
+}

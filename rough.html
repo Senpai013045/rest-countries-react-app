@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      ff g hh h
+
+      <h1>
+        h h
+        <fieldset>
+          gdf
+          <fieldset>ss</fieldset>
+        </fieldset>
+      </h1>
+    </div>
+    <script>
+      fetch("https://restcountries.eu/data/syc.svg")
+        .then((res) => res.blob())
+        .then((img) => {
+          const i = document.createElement("img");
+          const objectUrl = URL.createObjectURL(img);
+          i.src = objectUrl;
+          document.querySelector("#container").appendChild(i);
+        });
+    </script>
+  </body>
+</html>

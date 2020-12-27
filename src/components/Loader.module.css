@@ -1,0 +1,25 @@
+figcaption {
+  position: relative;
+  animation: spin 2s ease-in-out infinite;
+  transform-origin: center;
+}
+.loader1 {
+  width: 10rem;
+  height: 10rem;
+  border: 1rem solid var(--color-text);
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: center;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
