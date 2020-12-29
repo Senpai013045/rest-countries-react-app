@@ -10,7 +10,14 @@ const Home = ({ isLoading, isError, isSuccess, data, filterText }) => {
     return country.name.toLowerCase().includes(filterText);
   };
   return (
-    <section style={{ position: "absolute", left: "0", width: "100%" }}>
+    <section
+      style={{
+        position: "absolute",
+        left: "0",
+        width: "100%",
+        transition: "all 0.3s",
+      }}
+    >
       <Form />
       {isLoading && <Loader />}
       {isError && <Error error={"Couldn't reach the server"} />}

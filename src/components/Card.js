@@ -26,7 +26,7 @@ const Card = ({ details }) => {
     >
       <section
         className={styles.card}
-        onClick={() => history.push("/country/nepal")}
+        onClick={() => history.push("/country/sampleCountry")}
       >
         <figure
           className={styles.imageHolder}

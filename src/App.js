@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
-//import CountryContainer from "./components/CountryContainer";
 import Header from "./components/Header";
 import GlobalContext from "./context/globalContext";
 import { ReactQueryDevtools } from "react-query/devtools";
-// import Form from "./components/Form";
-// import Loader from "./components/Loader";
-// import Error from "./components/Error";
-// import Card from "./components/Card";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import DetailPage from "./components/DetailPage";
 import Home from "./components/Home";
+import { CSSTransition } from "react-transition-group";
 
 const fetchFunction = async () => {
   const res = await fetch(
@@ -18,7 +14,6 @@ const fetchFunction = async () => {
   );
   console.log("fetch function fired");
   return res.json();
-  //will be using react query, it uses the promise
 };
 
 function App() {
@@ -28,16 +23,9 @@ function App() {
     "allCountries",
     fetchFunction
   );
-  //needs some setup on index.js
 
-  //filtering
   const [filterText, setFilterText] = useState("");
 
-  // const filterFunction = (country) => {
-  //   return country.name.toLowerCase().includes(filterText);
-  // };
-
-  //how did you use context again?
   return (
     <GlobalContext.Provider
       value={{ setLightMode, lightMode, filterText, setFilterText }}
@@ -47,26 +35,41 @@ function App() {
       >
         <Header />
         <Route exact path="/country/:countryName">
-          <DetailPage />
+          {({ match }) => {
+            return (
+              <CSSTransition
+                unmountOnExit
+                in={match !== null}
+                timeout={300}
+                classNames="fade-right"
+              >
+                <DetailPage />
+              </CSSTransition>
+            );
+          }}
         </Route>
-        <Route path="/">
-          <Home
-            isError={isError}
-            isLoading={isLoading}
-            isSuccess={isSuccess}
-            data={data}
-            filterText={filterText}
-          />
-          {/* <Form />
-          {isLoading && <Loader />}
-          {isError && <Error error={"Couldn't reach the server"} />}
-          {isSuccess && (
-            <CountryContainer>
-              {data.filter(filterFunction).map((d) => (
-                <Card details={d} key={d.name} />
-              ))}
-            </CountryContainer>
-          )} */}
+        <Route exact path="/">
+          {({ match }) => {
+            return (
+              <CSSTransition
+                in={match !== null}
+                classNames="fade-left"
+                unmountOnExit
+                timeout={300}
+              >
+                <Home
+                  isError={isError}
+                  isLoading={isLoading}
+                  isSuccess={isSuccess}
+                  data={data}
+                  filterText={filterText}
+                />
+              </CSSTransition>
+            );
+          }}
+        </Route>
+        <Route path="*">
+          <Redirect to="/" />
         </Route>
       </main>
       <ReactQueryDevtools initialIsOpen={false} />
