@@ -2,8 +2,10 @@ import React from "react";
 import { useQuery } from "react-query";
 import { CSSTransition } from "react-transition-group";
 import styles from "./Card.module.css";
+import { useHistory } from "react-router-dom";
 
 const Card = ({ details }) => {
+  const history = useHistory();
   const { data } = useQuery(["image", details.flag], async () => {
     console.log("image fetch fired");
     const response = await fetch(details.flag);
@@ -22,7 +24,10 @@ const Card = ({ details }) => {
         exitActive: styles.exited,
       }}
     >
-      <section className={styles.card}>
+      <section
+        className={styles.card}
+        onClick={() => history.push("/country/nepal")}
+      >
         <figure
           className={styles.imageHolder}
           style={{ backgroundImage: `url(${data})` }}

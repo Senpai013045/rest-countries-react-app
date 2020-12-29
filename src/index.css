@@ -40,4 +40,37 @@ body {
   color: var(--color-text);
   background-color: var(--color-background);
   min-height: 100vh;
+  position: relative;
+}
+.fade-enter {
+  opacity: 0;
+  transform: translateX(100vw);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-exit-active {
+  opacity: 0;
+  transform: translateX(100vw);
+}
+.enter {
+  opacity: 0;
+  transform: translateX(20rem);
+}
+.enterActive {
+  opacity: 1;
+  transform: translateX(0);
+}
+.exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.exitActive {
+  opacity: 0;
+  transform: translateX(20rem);
 }
