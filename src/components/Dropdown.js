@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import Backdrop from "./Backdrop";
 import styles from "./Dropdown.module.css";
-const regions = ["All", "Africa", "America", "Asia", "Europe", "Ocenia"];
+import GlobalContext from "../context/globalContext";
+const regions = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
 
 const Dropdown = () => {
   const [showDropdown, setShowDropDown] = useState(false);
-  const [selected, setSelected] = useState("All");
+
+  const { selected, setSelected } = useContext(GlobalContext);
+  // const [selected, setSelected] = useState("All");
 
   const toggleDropdownHandler = () => setShowDropDown((prev) => !prev);
   const hideDropdown = () => setShowDropDown(false);

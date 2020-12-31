@@ -18,6 +18,7 @@ const fetchFunction = async () => {
 
 function App() {
   const [lightMode, setLightMode] = useState(false);
+  const [selected, setSelected] = useState("All");
 
   const { data, isLoading, isSuccess, isError } = useQuery(
     "allCountries",
@@ -28,7 +29,14 @@ function App() {
 
   return (
     <GlobalContext.Provider
-      value={{ setLightMode, lightMode, filterText, setFilterText }}
+      value={{
+        setLightMode,
+        lightMode,
+        filterText,
+        setFilterText,
+        selected,
+        setSelected,
+      }}
     >
       <main
         className={["App", lightMode ? "light-mode" : "dark-mode"].join(" ")}
@@ -63,6 +71,7 @@ function App() {
                   isSuccess={isSuccess}
                   data={data}
                   filterText={filterText}
+                  selected={selected}
                 />
               </CSSTransition>
             );

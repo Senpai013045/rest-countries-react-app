@@ -5,6 +5,8 @@ const GlobalContext = React.createContext({
   lightMode: false,
   filterText: "",
   setFilterText: () => {},
+  selected: "All",
+  setSelected: () => {},
 });
 
 export default GlobalContext;
