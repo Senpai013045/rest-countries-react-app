@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styles from "./ThemeSwitcher.module.css";
-import sun from "../assets/icons/weather_sun.svg";
-import moon from "../assets/icons/weather_moon.svg";
+import { ReactComponent as Sun } from "../assets/icons/weather_sun.svg";
+import { ReactComponent as Moon } from "../assets/icons/weather_moon.svg";
 import GlobalContext from "../context/globalContext";
 
 const ThemeSwitcher = () => {
@@ -12,11 +12,16 @@ const ThemeSwitcher = () => {
       onClick={() => globalContext.setLightMode(!globalContext.lightMode)}
     >
       <figure className={styles.iconHolder}>
-        <img
+        {/* <img
           className={styles.icon}
           src={globalContext.lightMode ? sun : moon}
           alt="icon"
-        />
+        /> */}
+        {globalContext.lightMode ? (
+          <Sun className={styles.icon} />
+        ) : (
+          <Moon className={styles.icon} />
+        )}
       </figure>
       <span className={styles.modeName}>
         {globalContext.lightMode ? "Dark mode" : "Light mode"}
