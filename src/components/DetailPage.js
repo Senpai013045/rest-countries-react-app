@@ -64,16 +64,14 @@ const DetailPage = (props) => {
       {isLoading && <Loader />}
       {isSuccess && countryDetails && (
         <section className={styles.container}>
-          <figure className={styles.imageHolder}>
-            <img
-              src={location.blob}
-              style={{
-                marginLeft: countryDetails.name === "Nepal" ? "-22.4rem" : 0,
-                maxHeight: countryDetails.name === "Nepal" ? "50rem" : "100%",
-              }}
-              alt="flag"
-            />
-          </figure>
+          <figure
+            className={styles.imageHolder}
+            style={{
+              backgroundImage: `url(${location.blob})`,
+              backgroundSize:
+                countryDetails.name === "Nepal" ? "contain" : "cover",
+            }}
+          ></figure>
           <div className={styles.details}>
             <h2 className={styles.h2}>{countryDetails.name}</h2>
             <ul className={styles.ul}>
