@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { Redirect, useHistory, useParams } from "react-router";
+import { Redirect, useHistory, useLocation, useParams } from "react-router";
 import Button from "./Button";
 import styles from "./DetailPage.module.css";
 import Error from "./Error";
@@ -21,6 +21,9 @@ const fetchDetailsFunction = async (cn) => {
 const DetailPage = (props) => {
   const history = useHistory();
   const { countryName } = useParams();
+  const location = useLocation();
+
+  //console.log(location.blob);
 
   // useEffect(() => {
   //   fetch(`https://restcountries.eu/rest/v2/name/${countryName}?fullText=true`);
@@ -30,6 +33,14 @@ const DetailPage = (props) => {
     ["detailFetcher", countryName],
     () => fetchDetailsFunction(countryName)
   );
+
+  const [countryDetails, setCountryDetails] = useState(null);
+
+  useEffect(() => {
+    if (data) {
+      setCountryDetails(data[0]);
+    }
+  }, [data]);
 
   if (!countryName) {
     return <Redirect to="/" />;
@@ -51,7 +62,93 @@ const DetailPage = (props) => {
       </Button>
       {isError && <Error />}
       {isLoading && <Loader />}
-      {isSuccess && JSON.stringify(data)}
+      {isSuccess && countryDetails && (
+        <section className={styles.container}>
+          <figure
+            className={styles.imageHolder}
+            style={{
+              backgroundImage: `url(${location.blob})`,
+            }}
+          ></figure>
+          <div className={styles.details}>
+            <h2 className={styles.h2}>
+              {countryDetails ? countryDetails.name : null}
+              {console.log(data[0])}
+            </h2>
+            <ul className={styles.ul}>
+              {/*----------------------------------*/}
+              <li className={styles.li}>
+                Native Name:
+                <span className={styles.presenter}>
+                  {countryDetails.nativeName}
+                </span>
+              </li>
+              {/*----------------------------------*/}
+              <li className={styles.li}>
+                Population:
+                <span className={styles.presenter}>
+                  {countryDetails.population}
+                </span>
+              </li>
+              {/*----------------------------------*/}
+              <li className={styles.li}>
+                Region:
+                <span className={styles.presenter}>
+                  {countryDetails.region}
+                </span>
+              </li>
+              {/*----------------------------------*/}
+              <li className={styles.li}>
+                Sub Region:
+                <span className={styles.presenter}>
+                  {countryDetails.subregion}
+                </span>
+              </li>
+              {/*----------------------------------*/}
+              <li className={styles.li}>
+                Capital:
+                <span className={styles.presenter}>
+                  {countryDetails.capital}
+                </span>
+              </li>
+              {/*----------------------------------*/}
+              <li className={styles.li}>
+                Top Level Domain:
+                <span className={styles.presenter}>
+                  {countryDetails.topLevelDomain}
+                </span>
+              </li>
+              {/*----------------------------------*/}
+              <li className={styles.li}>
+                Currencies:
+                <span className={styles.presenter}>
+                  {countryDetails.currencies.map((cur, i) => {
+                    if (i === countryDetails.currencies.length - 1) {
+                      return cur.name;
+                    } else {
+                      return cur.name + ", ";
+                    }
+                  })}
+                </span>
+              </li>
+              {/*----------------------------------*/}
+              <li className={styles.li}>
+                Languages:
+                <span className={styles.presenter}>
+                  {countryDetails.languages.map((lang, i) => {
+                    if (i === countryDetails.languages.length - 1) {
+                      return lang.name;
+                    } else {
+                      return lang.name + ", ";
+                    }
+                  })}
+                </span>
+              </li>
+              {/*----------------------------------*/}
+            </ul>
+          </div>
+        </section>
+      )}
     </section>
   );
 };
