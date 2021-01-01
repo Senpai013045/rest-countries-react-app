@@ -18,9 +18,9 @@ const ThemeSwitcher = () => {
           alt="icon"
         /> */}
         {globalContext.lightMode ? (
-          <Sun className={styles.icon} />
-        ) : (
           <Moon className={styles.icon} />
+        ) : (
+          <Sun className={styles.icon} />
         )}
       </figure>
       <span className={styles.modeName}>
