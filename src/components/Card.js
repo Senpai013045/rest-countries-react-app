@@ -26,7 +26,12 @@ const Card = ({ details }) => {
     >
       <section
         className={styles.card}
-        onClick={() => history.push(`/country/${details.name}`)}
+        onClick={() =>
+          history.push({
+            pathname: `/country/${details.name}`,
+            blob: data,
+          })
+        }
       >
         <figure
           className={styles.imageHolder}

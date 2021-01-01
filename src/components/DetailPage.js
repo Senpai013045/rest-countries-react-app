@@ -7,6 +7,7 @@ import Error from "./Error";
 import Loader from "./Loader";
 
 const fetchDetailsFunction = async (cn) => {
+  console.log("detailFetcher Fired");
   if (!cn) {
     return;
   }
@@ -44,10 +45,13 @@ const DetailPage = (props) => {
         transition: "all 0.3s",
       }}
     >
-      <Button _onClick={history.goBack}>Back</Button>
+      <Button _onClick={history.goBack}>
+        <span className={styles.icon}> &larr; </span>
+        Back
+      </Button>
       {isError && <Error />}
       {isLoading && <Loader />}
-      {isSuccess && "Success"}
+      {isSuccess && JSON.stringify(data)}
     </section>
   );
 };
