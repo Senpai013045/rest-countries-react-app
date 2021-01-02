@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "react-query";
 import { CSSTransition } from "react-transition-group";
 import styles from "./Card.module.css";
 import { useHistory } from "react-router-dom";
+import GlobalContext from "../context/globalContext";
 
 const Card = ({ details }) => {
   const history = useHistory();
-  const { data } = useQuery(["image", details.flag], async () => {
-    console.log("image fetch fired");
-    const response = await fetch(details.flag);
-    const blob = await response.blob();
-    const objectUrl = URL.createObjectURL(blob);
-    return objectUrl;
-  });
+  const { setImageBlobIndex } = useContext(GlobalContext);
+  const { data } = useQuery(
+    ["image", details.name],
+    async () => {
+      console.log("image fetch fired");
+      const response = await fetch(details.flag);
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      return objectUrl;
+    },
+    {
+      onSuccess: (data) => {
+        setImageBlobIndex((indexes) => {
+          const prevData = { ...indexes };
+          prevData[details.name] = data;
+          return prevData;
+        });
+      },
+    }
+  );
   return (
     <CSSTransition
       in={true}

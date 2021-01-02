@@ -7,6 +7,8 @@ const GlobalContext = React.createContext({
   setFilterText: () => {},
   selected: "All",
   setSelected: () => {},
+  imageBlobIndex: {},
+  setImageBlobIndex: () => {},
 });
 
 export default GlobalContext;

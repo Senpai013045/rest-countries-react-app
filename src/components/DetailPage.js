@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { Redirect, useHistory, useLocation, useParams } from "react-router";
+import { Redirect, useHistory, useParams } from "react-router";
 import Button from "./Button";
 import styles from "./DetailPage.module.css";
 import Error from "./Error";
 import Loader from "./Loader";
+import GlobalContext from "../context/globalContext";
 
 const fetchDetailsFunction = async (cn) => {
   console.log("detailFetcher Fired");
@@ -18,10 +19,11 @@ const fetchDetailsFunction = async (cn) => {
   //has to return a promise
 };
 
-const DetailPage = (props) => {
+const DetailPage = ({ alpha3codeIndex }) => {
+  const { imageBlobIndex } = useContext(GlobalContext);
   const history = useHistory();
   const { countryName } = useParams();
-  const location = useLocation();
+  //const location = useLocation();
 
   //console.log(location.blob);
 
@@ -64,14 +66,16 @@ const DetailPage = (props) => {
       {isLoading && <Loader />}
       {isSuccess && countryDetails && (
         <section className={styles.container}>
-          <figure
-            className={styles.imageHolder}
-            style={{
-              backgroundImage: `url(${location.blob})`,
-              backgroundSize:
-                countryDetails.name === "Nepal" ? "contain" : "cover",
-            }}
-          ></figure>
+          <div className={styles.imageHolderHolder}>
+            <figure
+              className={styles.imageHolder}
+              style={{
+                backgroundImage: `url(${imageBlobIndex[countryDetails.name]})`,
+                backgroundSize:
+                  countryDetails.name === "Nepal" ? "contain" : "cover",
+              }}
+            ></figure>
+          </div>
           <div className={styles.details}>
             <h2 className={styles.h2}>{countryDetails.name}</h2>
             <ul className={styles.ul}>
@@ -97,19 +101,25 @@ const DetailPage = (props) => {
                 </span>
               </li>
               {/*----------------------------------*/}
-              <li className={styles.li}>
-                Sub Region:
-                <span className={styles.presenter}>
-                  {countryDetails.subregion}
-                </span>
-              </li>
+              {countryDetails.subregion ? (
+                <li className={styles.li}>
+                  Sub Region:
+                  <span className={styles.presenter}>
+                    {countryDetails.subregion}
+                  </span>
+                </li>
+              ) : null}
+
               {/*----------------------------------*/}
-              <li className={styles.li}>
-                Capital:
-                <span className={styles.presenter}>
-                  {countryDetails.capital}
-                </span>
-              </li>
+              {countryDetails.capital ? (
+                <li className={styles.li}>
+                  Capital:
+                  <span className={styles.presenter}>
+                    {countryDetails.capital}
+                  </span>
+                </li>
+              ) : null}
+
               {/*----------------------------------*/}
               <li className={styles.li}>
                 Top Level Domain:
@@ -145,6 +155,23 @@ const DetailPage = (props) => {
               </li>
               {/*----------------------------------*/}
             </ul>
+            {countryDetails.borders.length > 0 ? (
+              <div className={styles.borderContainer}>
+                <h4 className={styles.h4}>Border Countries:</h4>
+                <div className={styles.chipContainer}>
+                  {countryDetails.borders.map((c) => (
+                    <Button
+                      _onClick={() =>
+                        history.push(`/country/${alpha3codeIndex[c]}`)
+                      }
+                      key={c}
+                    >
+                      {alpha3codeIndex[c]}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
         </section>
       )}

@@ -15,11 +15,12 @@
   width: 100%;
   background-color: rgba(32, 178, 171, 0.521);
   background-size: cover;
+  background-position: center;
   background-origin: 50% 50%;
 }
-img {
-  width: 100%;
-}
+/* img {
+  height: 100%;
+} */
 
 .enter {
   opacity: 0;

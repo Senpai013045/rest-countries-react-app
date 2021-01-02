@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import Header from "./components/Header";
 import GlobalContext from "./context/globalContext";
@@ -25,6 +25,23 @@ function App() {
     fetchFunction
   );
 
+  const [alpha3codeIndex, setAlpha3codeIndex] = useState({});
+  const [imageBlobIndex, setImageBlobIndex] = useState({});
+
+  // useEffect(() => {
+  //   console.log(imageBlobIndex);
+  // }, [imageBlobIndex]);
+
+  useEffect(() => {
+    const index = {};
+    if (data) {
+      data.forEach((c) => {
+        index[c.alpha3Code] = c.name;
+      });
+      setAlpha3codeIndex(index);
+    }
+  }, [data]);
+
   const [filterText, setFilterText] = useState("");
 
   return (
@@ -36,6 +53,8 @@ function App() {
         setFilterText,
         selected,
         setSelected,
+        imageBlobIndex,
+        setImageBlobIndex,
       }}
     >
       <main
@@ -51,7 +70,7 @@ function App() {
                 timeout={300}
                 classNames="fade-right"
               >
-                <DetailPage />
+                <DetailPage alpha3codeIndex={alpha3codeIndex} />
               </CSSTransition>
             );
           }}

@@ -9,4 +9,8 @@
   font-size: 1.4rem;
   border-radius: 0.5rem;
   cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+.btn:hover {
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.3);
 }

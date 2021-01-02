@@ -32,6 +32,7 @@
 html {
   font-size: 62.5%;
   font-family: "Nunito Sans", sans-serif;
+  scroll-behavior: smooth;
 }
 body {
   box-sizing: border-box;
@@ -43,34 +44,34 @@ body {
   position: relative;
 }
 .fade-left-enter {
-  opacity: 0;
-  transform: translateX(-50vh);
+  /* opacity: 0; */
+  transform: translateX(-50vw);
 }
 .fade-left-enter-active {
-  opacity: 1;
+  /* opacity: 1; */
   transform: translateX(0);
 }
 .fade-left-exit {
-  opacity: 1;
+  /* opacity: 1; */
   transform: translateX(0);
 }
 .fade-left-exit-active {
-  opacity: 0;
-  transform: translateX(-50vh);
+  /* opacity: 0; */
+  transform: translateX(-50vw);
 }
 .fade-right-enter {
-  opacity: 0;
+  /* opacity: 0; */
   transform: translateX(50vw);
 }
 .fade-right-enter-active {
-  opacity: 1;
+  /* opacity: 1; */
   transform: translateX(0);
 }
 .fade-right-exit {
-  opacity: 1;
+  /* opacity: 1; */
   transform: translateX(0);
 }
 .fade-right-exit-active {
-  opacity: 0;
+  /* opacity: 0; */
   transform: translateX(50vw);
 }
