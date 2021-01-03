@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Redirect, useHistory, useParams } from "react-router";
 import Button from "./Button";
 import styles from "./DetailPage.module.css";
 import Error from "./Error";
 import Loader from "./Loader";
-import GlobalContext from "../context/globalContext";
+import { queryClient } from "../index";
 
 const fetchDetailsFunction = async (cn) => {
   console.log("detailFetcher Fired");
@@ -20,7 +20,6 @@ const fetchDetailsFunction = async (cn) => {
 };
 
 const DetailPage = ({ alpha3codeIndex }) => {
-  const { imageBlobIndex } = useContext(GlobalContext);
   const history = useHistory();
   const { countryName } = useParams();
   //const location = useLocation();
@@ -37,6 +36,10 @@ const DetailPage = ({ alpha3codeIndex }) => {
   );
 
   const [countryDetails, setCountryDetails] = useState(null);
+
+  //experimental ground
+  const blob = queryClient.getQueryData(["image", countryName]);
+  //expiremental ground end
 
   useEffect(() => {
     if (data) {
@@ -70,7 +73,8 @@ const DetailPage = ({ alpha3codeIndex }) => {
             <figure
               className={styles.imageHolder}
               style={{
-                backgroundImage: `url(${imageBlobIndex[countryDetails.name]})`,
+                // backgroundImage: `url(${imageBlobIndex[countryDetails.name]})`,
+                backgroundImage: `url(${blob})`,
                 backgroundSize:
                   countryDetails.name === "Nepal" ? "contain" : "cover",
               }}

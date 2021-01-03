@@ -26,11 +26,6 @@ function App() {
   );
 
   const [alpha3codeIndex, setAlpha3codeIndex] = useState({});
-  const [imageBlobIndex, setImageBlobIndex] = useState({});
-
-  // useEffect(() => {
-  //   console.log(imageBlobIndex);
-  // }, [imageBlobIndex]);
 
   useEffect(() => {
     const index = {};
@@ -53,8 +48,7 @@ function App() {
         setFilterText,
         selected,
         setSelected,
-        imageBlobIndex,
-        setImageBlobIndex,
+        data,
       }}
     >
       <main

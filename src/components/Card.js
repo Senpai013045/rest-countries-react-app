@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import { CSSTransition } from "react-transition-group";
 import styles from "./Card.module.css";
 import { useHistory } from "react-router-dom";
-import GlobalContext from "../context/globalContext";
 
 const Card = ({ details }) => {
   const history = useHistory();
-  const { setImageBlobIndex } = useContext(GlobalContext);
   const { data } = useQuery(
     ["image", details.name],
     async () => {
@@ -19,11 +17,11 @@ const Card = ({ details }) => {
     },
     {
       onSuccess: (data) => {
-        setImageBlobIndex((indexes) => {
-          const prevData = { ...indexes };
-          prevData[details.name] = data;
-          return prevData;
-        });
+        // setImageBlobIndex((indexes) => {
+        //   const prevData = { ...indexes };
+        //   prevData[details.name] = data;
+        //   return prevData;
+        // });
       },
     }
   );
