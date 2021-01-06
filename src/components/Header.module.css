@@ -5,7 +5,17 @@
   padding: 2.5rem 10rem;
   background-color: var(--color-background-header);
 }
+@media only screen and (max-width: 830px) {
+  .header {
+    padding: 2.5rem 4rem;
+  }
+}
 .primaryHeading {
   font-size: 3rem;
   cursor: pointer;
+}
+@media only screen and (max-width: 540px) {
+  .primaryHeading {
+    font-size: 2rem;
+  }
 }

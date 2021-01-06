@@ -61,7 +61,7 @@ function App() {
               <CSSTransition
                 unmountOnExit
                 in={match !== null}
-                timeout={300}
+                timeout={500}
                 classNames="fade-right"
               >
                 <DetailPage alpha3codeIndex={alpha3codeIndex} />
@@ -76,7 +76,7 @@ function App() {
                 in={match !== null}
                 classNames="fade-left"
                 unmountOnExit
-                timeout={300}
+                timeout={500}
               >
                 <Home
                   isError={isError}

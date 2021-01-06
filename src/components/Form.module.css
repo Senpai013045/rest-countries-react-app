@@ -1,18 +1,39 @@
 .form {
-  display: flex;
+  /* display: flex;
   align-items: center;
+  justify-content: space-between; */
+  display: grid;
+  /* grid-template-columns: repeat(2, max-content); */
+  grid-template-columns: minmax(max-content, 40%) max-content;
   justify-content: space-between;
+  align-items: center;
   padding: 3.5rem 10rem;
+}
+@media only screen and (max-width: 830px) {
+  .form {
+    padding: 3.5rem 4rem;
+  }
+}
+@media only screen and (max-width: 540px) {
+  .form {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    grid-row-gap: 3rem;
+  }
+  .inputHolder {
+    width: 100%;
+  }
 }
 .inputHolder {
   position: relative;
-  flex: 0 0 30%;
+  /* flex: 0 0 30%; */
 }
+
 .input {
   background-color: var(--color-elements);
   border: none;
   font-size: 1.6rem;
-  padding: 2rem 2rem 2rem 8rem;
+  padding: 2rem 8rem 2rem 8rem;
   color: var(--color-text);
   border-radius: 0.5rem;
   width: 100%;

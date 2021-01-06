@@ -58,7 +58,7 @@ const DetailPage = ({ alpha3codeIndex }) => {
         position: "absolute",
         left: "0",
         width: "100%",
-        transition: "all 0.3s",
+        transition: "all 0.5s",
       }}
     >
       <Button _onClick={history.goBack}>

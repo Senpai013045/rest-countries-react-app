@@ -5,6 +5,15 @@
   font-weight: 600;
   cursor: pointer;
 }
+@media only screen and (max-width: 540px) {
+  .container {
+    font-size: 1.4rem;
+  }
+  .iconHolder {
+    width: 2.2rem;
+  }
+}
+
 .iconHolder {
   margin-right: 1rem;
   display: flex;
